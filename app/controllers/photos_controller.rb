@@ -2,30 +2,23 @@ class PhotosController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
 
-  # GET /photos
-  # GET /photos.json
   def index
     @photos = Photo.all
   end
 
-  # GET /photos/1
-  # GET /photos/1.json
   def show
   end
 
-  # GET /photos/new
   def new
     @photo = Photo.new
   end
 
-  # GET /photos/1/edit
   def edit
   end
 
-  # POST /photos
-  # POST /photos.json
   def create
     @photo = Photo.new(photo_params)
+    @photo.user_id = current_user.id
 
     respond_to do |format|
       if @photo.save
@@ -38,8 +31,6 @@ class PhotosController < ApplicationController
     end
   end
 
-  # PATCH/PUT /photos/1
-  # PATCH/PUT /photos/1.json
   def update
     respond_to do |format|
       if @photo.update(photo_params)
@@ -52,8 +43,6 @@ class PhotosController < ApplicationController
     end
   end
 
-  # DELETE /photos/1
-  # DELETE /photos/1.json
   def destroy
     @photo.destroy
     respond_to do |format|
@@ -63,12 +52,10 @@ class PhotosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_photo
       @photo = Photo.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def photo_params
       params.require(:photo).permit(:description, :user_id)
     end
