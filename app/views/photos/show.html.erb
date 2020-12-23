@@ -1,14 +1,18 @@
-<p id="notice"><%= notice %></p>
+<div class="max-w-4xl m-auto">
+  <%= link_to @photo do %>
+    <%= image_tag @photo.insta_image if @photo.insta_image.present? %>
+  <% end %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @photo.description %>
-</p>
+  <div class="p-6">
+    <div class="leading-normal text-lg">
+      <%= @photo.description %>
+    </div>
 
-<p>
-  <strong>User:</strong>
-  <%= @photo.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
-<%= link_to 'Back', photos_path %>
+    <% if user_signed_in? && current_user.id == @photo.user_id %>
+      <div class="my-4">
+        <%= link_to 'Edit', edit_photo_path(@photo), class: "btn btn-default" %>
+        <%= link_to 'Delete', @photo, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
+    </div>
+    <% end %>
+  </div>
+</div>
