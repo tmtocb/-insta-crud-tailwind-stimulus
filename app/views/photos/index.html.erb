@@ -8,7 +8,7 @@
   <% @photos.each do |photo| %>
     <article class="border rounded-lg lg:w-1/3 w-full">
       <%= link_to photo do %>
-        <%#= image_path %> Image goes here
+           <%= image_tag photo.insta_image if photo.insta_image.present? %>
       <% end %>
     <div class="p-6">
         <div class="leading-normal text-lg">
