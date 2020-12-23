@@ -57,6 +57,6 @@ class PhotosController < ApplicationController
     end
 
     def photo_params
-      params.require(:photo).permit(:description, :user_id)
+      params.require(:photo).permit(:description, :user_id, :insta_image)
     end
 end
