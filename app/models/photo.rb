@@ -3,4 +3,5 @@ class Photo < ApplicationRecord
 
   validates :description, presence: true
   has_one_attached :insta_image
+  validates :insta_image, presence: true
 end
